@@ -1,6 +1,6 @@
 # ts-projects
 
-## TypeScript
+## [TypeScript](https://www.typescriptlang.org/docs/)
 
 - superset of JavaScript
   - or extension
@@ -32,6 +32,8 @@
 - need to transpiler your TypeScript file to JavaScript, because TypeScript does not run on a browser
   - `tsc (name of TypeScript file)` in terminal
   - watch mode `tsc (name of TyeScript file) -w` in terminal
+  - TypeScript by default will transpiler in ES3
+    - this will allow the app to work on every browser
 
 - tsconfig.json is a file specifies the root files and the compiler options required to compile the project
   - You can setup your own options in the tsconfig.json file
@@ -56,5 +58,112 @@
 
 - Variables in TypeScript
   - var
-  - const
-  - let
+  - const - can't be changed through reassignment, and it can't be redeclare.
+  - let - declares a block-scoped local variable, optionally initializing it to a value.
+
+  ```typescript
+  let myName: string = '';
+  let myAge: number = 0;
+  let myLocation: boolean = true;
+  let colors: string[] = ['blue', 'green', 'red']
+  let colors: number[] = [10, 15, 23]
+  ```
+
+### Functions In TypeScripts
+
+- Functions are like JavaScript in TypeScript but need to give types to arguments and the return
+
+```typescript
+const getFullName = (firstName:string, lastName: string): string => {
+  return firstName + '' + lastName;
+}
+console.log(getFullName('Jon', 'Smith'));
+
+```
+
+### Interfaces
+
+- Interfaces in TypeScript help us to describe entities in objects
+
+#### Creating Objects
+
+```typescript
+const user: { name: string, age: number } = {
+  name: 'Paul',
+  age: 35
+}
+const user2: { name: string, age: number } = {
+  name: 'Jon',
+  age: 34
+}
+```
+
+- A better way to write this with interface
+
+```typescript
+interface User{
+  name:string;
+  age: number;
+}
+const user: User = {
+  name: 'Paul',
+  age: 35
+}
+const user2: User = {
+  name: 'Jon',
+  age: 34
+}
+```
+
+- put a `?` after the property will make the property not mandatory in an interface
+
+```typescript
+interface User{
+  name:string;
+  age?: number;
+
+}
+const user: User = {
+  name: 'Paul',
+  age: 35
+}
+const user2: User = {
+  name: 'Jon'
+}
+```
+
+#### Creating Functions
+
+```typescript
+interface User {
+  name: string;
+  age?: number;
+  getMessage(): string;
+}
+const user: User = {
+  name: 'Paul',
+  age: 35,
+  getMessage(){
+    return 'Hello ' + user.name;
+  }
+}
+
+const user2: User = {
+  name: 'Jack',
+  getMessage(){
+    return 'Hello ' + user2.name;
+  }
+}
+console.log(user.getMessage())
+```
+
+### Types and Unions
+
+#### Union Operator in TypeScript
+
+`|`: is a Union Operator in TypeScript combine data types
+
+```typescript
+let pageName: string | number ='1';
+```
+
